@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  graphql:
+    websocket:
+      path: /graphql/ws
+    path: /graphql
+  web:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+      allowed-headers: "*"

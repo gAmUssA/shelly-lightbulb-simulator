@@ -1,0 +1,52 @@
+type Query {
+    lightState: LightState!
+    deviceStatus: DeviceStatus!
+}
+
+type Mutation {
+    setLight(input: LightInput!): LightState!
+    toggleLight: LightState!
+    setEffect(effect: Int!): LightState!
+}
+
+type Subscription {
+    lightStateChanged: LightState!
+}
+
+type LightState {
+    ison: Boolean!
+    mode: String!
+    red: Int!
+    green: Int!
+    blue: Int!
+    white: Int!
+    gain: Int!
+    brightness: Int!
+    temp: Int!
+    transition: Int!
+    effect: Int!
+    source: String!
+}
+
+type DeviceStatus {
+    deviceId: String!
+    deviceType: String!
+    firmware: String!
+    light: LightState!
+    uptime: Int!
+    hasUpdate: Boolean!
+}
+
+input LightInput {
+    turn: String
+    mode: String
+    red: Int
+    green: Int
+    blue: Int
+    white: Int
+    gain: Int
+    brightness: Int
+    temp: Int
+    transition: Int
+    effect: Int
+}
