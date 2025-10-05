@@ -37,6 +37,9 @@ backend/gradle-app.setting
 backend/.gradletasknamecache
 *.class
 *.jar
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
 *.war
 *.ear
 hs_err_pid*

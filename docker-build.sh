@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 
 # Default values
 VERSION="${VERSION:-1.0.0}"
-REGISTRY="${REGISTRY:-}"
+REGISTRY="${REGISTRY:-gamussa}"
 REPOSITORY="${REPOSITORY:-shelly-simulator}"
 
 # Image names
