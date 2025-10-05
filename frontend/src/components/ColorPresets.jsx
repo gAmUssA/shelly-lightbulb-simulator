@@ -84,13 +84,17 @@ export default function ColorPresets() {
   return (
     <div
       style={{
+        position: 'fixed',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
         gap: '10px',
-        marginTop: '30px',
-        padding: '10px'
+        padding: '10px',
+        zIndex: 10
       }}
     >
       {colorPresets.map((preset, index) => (

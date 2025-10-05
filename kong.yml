@@ -23,8 +23,6 @@ services:
         protocols:
           - http
           - https
-          - ws
-          - wss
     
     plugins:
       # CORS plugin for cross-origin requests

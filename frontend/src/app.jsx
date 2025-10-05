@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'preact/hooks'
 import Bulb from './components/Bulb'
 import ApiTester from './components/ApiTester'
+import ColorPresets from './components/ColorPresets'
 import { subscribeLightState } from './services/graphql'
 import './app.css'
 
@@ -34,6 +35,7 @@ export function App() {
   return (
     <>
       <Bulb state={lightState} />
+      <ColorPresets />
       <ApiTester />
     </>
   )

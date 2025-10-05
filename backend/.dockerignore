@@ -1,0 +1,39 @@
+# Gradle build artifacts
+build/
+.gradle/
+bin/
+out/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+*.md
+
+# Test reports
+test-results/
+reports/
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+*~
+
+# Local environment
+.env
+.env.local

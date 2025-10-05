@@ -72,7 +72,7 @@
   - Make script executable
   - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-- [-] 8. Update Makefile with Docker targets
+- [x] 8. Update Makefile with Docker targets
 
   - Add `docker-build` target to build images
   - Add `docker-run` target to start with docker-compose
@@ -95,7 +95,7 @@
   - Add production deployment best practices
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6_
 
-- [ ] 10. Create .dockerignore files
+- [x] 10. Create .dockerignore files
 
   - Create `backend/.dockerignore` to exclude build artifacts and IDE files
   - Create `frontend/.dockerignore` to exclude node_modules and build artifacts
