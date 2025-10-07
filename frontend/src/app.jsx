@@ -24,12 +24,21 @@ export function App() {
 
   // Subscribe to GraphQL light state changes on mount
   useEffect(() => {
-    const unsubscribe = subscribeLightState((newState) => {
-      setLightState(newState)
-    })
+    let unsubscribe
+    try {
+      unsubscribe = subscribeLightState((newState) => {
+        setLightState(newState)
+      })
+    } catch (error) {
+      console.error('Failed to subscribe to light state:', error)
+    }
 
     // Return cleanup function to unsubscribe on unmount
-    return unsubscribe
+    return () => {
+      if (unsubscribe) {
+        unsubscribe()
+      }
+    }
   }, [])
 
   return (

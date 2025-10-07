@@ -275,20 +275,22 @@ App
 #### 2. Bulb Component
 
 **Responsibilities:**
-- Display full-screen background color matching bulb state
 - Display realistic 3D bulb representation resembling Shelly smart bulb
 - Animate color transitions
 - Convert white mode temperature to RGB
 - Render bulb with proper proportions and visual elements
+- Emit localized glow effect only from the bulb component
 
 **Visual Design:**
-- Bulb shape: SVG or CSS-based 3D bulb with glass envelope and base
+- Page background: Neutral dark color (e.g., #1a1a1a or #0a0a0a) that remains constant
+- Bulb shape: CSS-based 3D bulb with glass envelope and base
 - Glass envelope: Semi-transparent with gradient for depth
 - Bulb base: E27 screw base with metallic appearance
 - Filament/LED area: Inner glow that changes color based on state
 - Shadows and highlights: Multiple layers for 3D effect
-- Glow effect: Radial gradient extending beyond bulb when on
+- Glow effect: Radial gradient extending outward from bulb (not full-screen), creating ambient light effect
 - Proportions: Realistic A60 bulb dimensions (60mm diameter, ~110mm height)
+- Glow containment: Use large radial gradient or box-shadow on bulb container to create localized light emission
 
 **State Management:**
 - Receives state via props from parent
@@ -299,8 +301,9 @@ App
 **Color Calculation:**
 - Color mode: Apply gain multiplier to RGB values
 - White mode: Convert Kelvin to RGB, apply brightness multiplier
-- Off state: Dimmed bulb with minimal glow (#000000 background)
-- On state: Full color with appropriate glow intensity
+- Off state: Dimmed bulb with minimal glow, dark page background remains
+- On state: Full color with appropriate glow intensity radiating from bulb
+- Glow implementation: Large box-shadow or pseudo-element with radial gradient positioned behind bulb
 
 **Kelvin to RGB Conversion:**
 Uses standard color temperature algorithm:
@@ -310,10 +313,11 @@ Uses standard color temperature algorithm:
 - All values clamped to 0-255
 
 **Visual States:**
-- Off: Dark glass, no glow, visible base structure
-- On (Color mode): Colored glow from center, glass tinted with color
-- On (White mode): White/warm glow based on temperature
+- Off: Dark glass, minimal glow, visible base structure, dark page background
+- On (Color mode): Colored glow radiating from bulb center, glass tinted with color, localized ambient light
+- On (White mode): White/warm glow based on temperature radiating from bulb
 - Transition: Smooth color interpolation with glow fade
+- Background: Consistent dark neutral color (#1a1a1a) regardless of bulb state
 
 #### 3. Color Preset Component
 
@@ -394,8 +398,8 @@ const colorPresets = [
 **Component Layout:**
 ```
 App
-├── Background (full-screen color)
-├── Bulb (centered, realistic 3D design)
+├── Background (dark neutral color, constant)
+├── Bulb (centered, realistic 3D design with localized glow)
 ├── ColorPresets (positioned below or beside bulb)
 └── ApiTester (collapsible panel or side drawer)
 ```
@@ -741,15 +745,16 @@ export default defineConfig({
 - Faster performance
 - Sufficient for simple UI needs
 
-### 5. Full-Screen Color Background
+### 5. Localized Bulb Glow Effect
 
-**Decision:** Change entire page background color.
+**Decision:** Keep page background neutral and emit light only from bulb component.
 
 **Rationale:**
-- Maximum visual impact
-- Immediately obvious state changes
-- Simulates room lighting effect
-- Simple to implement
+- More realistic representation of actual light bulb
+- Better visual focus on the bulb itself
+- Prevents overwhelming full-screen color changes
+- Allows other UI elements to remain visible
+- Creates ambient lighting effect similar to real bulb in dark room
 
 ### 6. Lenient Parameter Validation
 
@@ -928,10 +933,33 @@ COPY dist/ /usr/share/nginx/html
 
 **Option 1: CSS-based (Simpler, faster to implement)**
 ```css
+.page-background {
+  background-color: #1a1a1a;
+  width: 100vw;
+  height: 100vh;
+}
+
 .bulb-container {
   position: relative;
   width: 200px;
   height: 280px;
+}
+
+/* Ambient glow behind bulb */
+.bulb-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--bulb-color) 0%, transparent 70%);
+  opacity: 0.6;
+  filter: blur(60px);
+  z-index: -1;
+  transition: all 0.5s;
 }
 
 .bulb-glass {

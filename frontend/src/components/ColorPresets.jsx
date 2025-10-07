@@ -93,8 +93,11 @@ export default function ColorPresets() {
         flexWrap: 'wrap',
         justifyContent: 'center',
         gap: '10px',
-        padding: '10px',
-        zIndex: 10
+        padding: '15px 20px',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: '15px',
+        backdropFilter: 'blur(10px)',
+        zIndex: 100
       }}
     >
       {colorPresets.map((preset, index) => (

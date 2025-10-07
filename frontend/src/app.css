@@ -23,3 +23,32 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Bulb component styles */
+.bulb-container {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Ambient glow effect behind the bulb */
+.bulb-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--bulb-color) 0%, transparent 70%);
+  opacity: var(--glow-opacity);
+  filter: blur(60px);
+  z-index: -1;
+  transition: all var(--transition-time) ease-in-out;
+  pointer-events: none;
+}

@@ -1,8 +1,13 @@
 import { createClient } from 'graphql-ws';
 
 // Create WebSocket client instance connecting to backend GraphQL endpoint
+// Use relative URL to work with Vite proxy in development
+const wsUrl = import.meta.env.DEV 
+  ? 'ws://localhost:3000/graphql/ws'
+  : 'ws://localhost:8080/graphql/ws';
+
 const client = createClient({
-  url: 'ws://localhost:8080/graphql/ws',
+  url: wsUrl,
   connectionParams: {},
   retryAttempts: 5,
   shouldRetry: () => true,

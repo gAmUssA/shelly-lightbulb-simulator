@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 
 export default function ApiTester() {
+  const [isExpanded, setIsExpanded] = useState(false);
   const [endpoint, setEndpoint] = useState('/light/0');
   const [method, setMethod] = useState('GET');
   const [params, setParams] = useState('');
@@ -46,17 +47,42 @@ export default function ApiTester() {
       position: 'fixed',
       top: '20px',
       right: '20px',
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      padding: '20px',
-      borderRadius: '10px',
-      minWidth: '300px',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      padding: '15px 20px',
+      borderRadius: '15px',
+      minWidth: isExpanded ? '320px' : 'auto',
       maxWidth: '400px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+      backdropFilter: 'blur(10px)',
       fontFamily: 'system-ui, -apple-system, sans-serif',
+      zIndex: 100,
+      transition: 'all 0.3s ease',
     }}>
-      <h3 style={{ margin: '0 0 15px 0', fontSize: '18px' }}>API Tester</h3>
+      <div 
+        style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+          userSelect: 'none',
+        }}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <h3 style={{ margin: 0, fontSize: '18px' }}>API Tester</h3>
+        <span style={{ 
+          fontSize: '20px', 
+          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.3s ease',
+          display: 'inline-block',
+        }}>
+          ▼
+        </span>
+      </div>
       
-      <div style={{ marginBottom: '10px' }}>
+      
+      {isExpanded && (
+      <>
+      <div style={{ marginBottom: '10px', marginTop: '15px' }}>
         <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', fontWeight: '500' }}>
           Endpoint:
         </label>
@@ -157,6 +183,8 @@ export default function ApiTester() {
           {response || 'No response yet'}
         </pre>
       </div>
+      </>
+      )}
     </div>
   );
 }

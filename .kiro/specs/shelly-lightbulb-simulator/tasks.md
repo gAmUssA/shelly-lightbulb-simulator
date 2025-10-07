@@ -5,6 +5,7 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
 ## Completed Features
 
 - [x] 1. Initialize backend project structure
+
   - Spring Boot project with Kotlin using Gradle
   - All required dependencies configured
   - Package structure: config/, controller/, model/, service/
@@ -12,12 +13,15 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
   - _Requirements: 14.1_
 
 - [x] 2. Implement core data models
+
   - [x] 2.1 Create LightState data class with all properties
+
     - LightMode enum with COLOR and WHITE values
     - All properties with default values matching requirements
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 4.1, 4.2, 5.1, 5.2, 6.1, 12.1_
 
   - [x] 2.2 Create DeviceStatus data class
+
     - All device metadata properties implemented
     - _Requirements: 1.7_
 
@@ -26,12 +30,15 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
 - [x] 3. Implement LightService with state management
+
   - [x] 3.1 Create LightService class with in-memory state
+
     - MutableSharedFlow<LightState> with replay=1 for broadcasting
     - getState() and getDeviceStatus() methods with uptime calculation
     - _Requirements: 14.1, 14.2, 14.3_
 
   - [x] 3.2 Implement REST parameter update logic
+
     - updateState() method with full parameter parsing
     - Turn, mode, color, white, transition, and effect parameter handling
     - Value coercion to valid ranges
@@ -39,6 +46,7 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 1.2, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 4.1, 4.2, 4.3, 5.1, 5.2, 5.3, 6.1, 6.2, 12.1, 12.2, 15.1, 15.2, 15.3, 15.5_
 
   - [x] 3.3 Implement RPC parameter update logic
+
     - updateStateFromRpc() method with RGB array handling
     - Boolean and numeric parameter mapping
     - _Requirements: 2.1, 15.4_
@@ -49,7 +57,9 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 2.2, 2.4, 5.3_
 
 - [x] 4. Implement REST API controller
+
   - [x] 4.1 Create ShellyRestController with Gen1 endpoints
+
     - All GET and POST endpoints for /light, /color, /white
     - /status and /settings endpoints
     - CORS enabled for all origins
@@ -62,7 +72,9 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
 - [x] 5. Implement GraphQL schema and resolvers
+
   - [x] 5.1 Create GraphQL schema file
+
     - Query, Mutation, and Subscription types defined
     - LightState, DeviceStatus, and LightInput types
     - schema.graphqls in src/main/resources/graphql/
@@ -75,6 +87,7 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 8.1, 8.2, 8.3, 9.1, 9.2, 9.3, 10.1, 10.2, 10.3_
 
 - [x] 6. Initialize frontend project structure
+
   - Preact project with Vite
   - All dependencies installed (preact, graphql-ws)
   - vite.config.js with proxy to backend
@@ -82,19 +95,23 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
   - _Requirements: 7.6_
 
 - [x] 7. Implement GraphQL WebSocket client service
+
   - src/services/graphql.js with createClient
   - subscribeLightState() function with full subscription query
   - Error handling and automatic reconnection
   - _Requirements: 10.1, 10.2, 10.4_
 
 - [x] 8. Implement Bulb component
+
   - [x] 8.1 Create Bulb component with color rendering
+
     - Full-screen background with dynamic color
     - Realistic 3D bulb structure with nested divs
     - CSS transitions for smooth color changes
     - _Requirements: 7.1, 7.5, 7.6_
 
   - [x] 8.2 Implement color mode calculation
+
     - RGB calculation with gain multiplier
     - Off state handling (black background)
     - _Requirements: 7.2, 7.3_
@@ -105,6 +122,7 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 4.5, 7.4_
 
 - [x] 9. Implement API Tester component
+
   - Endpoint and method selection dropdowns
   - Parameter input field
   - Send button with fetch request execution
@@ -113,6 +131,7 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
   - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7_
 
 - [x] 10. Integrate App component and wire everything together
+
   - GraphQL subscription setup in useEffect
   - State management with useState
   - Component rendering (Bulb, ApiTester, ColorPresets)
@@ -120,12 +139,15 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
   - _Requirements: 10.1, 10.2, 10.3, 10.5_
 
 - [x] 11. Redesign Bulb component with realistic 3D appearance
+
   - [x] 11.1 Create bulb structure with CSS-based 3D design
+
     - Realistic bulb shape with proper proportions
     - bulb-glass, bulb-glow, and bulb-base divs
     - _Requirements: 16.1, 16.2, 16.5_
 
   - [x] 11.2 Implement visual effects and state-based styling
+
     - Radial gradients and box-shadows for 3D effect
     - Dynamic opacity and blur based on on/off state
     - Smooth transitions
@@ -137,17 +159,21 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 16.4, 16.6_
 
 - [x] 12. Implement Color Preset component
+
   - [x] 12.1 Create ColorPresets component with preset configuration
+
     - 8 color presets (Red, Green, Blue, Yellow, Purple, Cyan, Warm White, Cool White)
     - _Requirements: 17.1, 17.4_
 
   - [x] 12.2 Implement preset button rendering and styling
+
     - Circular buttons with color preview
     - Hover and active effects
     - Accessibility labels
     - _Requirements: 17.5, 17.7, 17.8_
 
   - [x] 12.3 Implement API calls for preset activation
+
     - POST requests to /color/0 and /white/0
     - Proper parameter formatting
     - Error handling
@@ -160,14 +186,46 @@ All tasks for the Shelly Lightbulb Simulator have been completed successfully. T
     - _Requirements: 17.8_
 
 - [x] 13. Integrate ColorPresets into App component
+
   - ColorPresets imported and rendered
   - Layout adjusted for all components
   - Real-time updates via subscription verified
   - _Requirements: 17.1, 17.2, 17.3_
 
+- [x] 14. Refine Bulb component to use localized glow instead of full-screen background
+
+  - [x] 14.1 Update page background to neutral dark color
+
+    - Change container background from dynamic bgColor to static #1a1a1a
+    - Ensure background remains constant regardless of bulb state
+    - _Requirements: 16.7, 16.9_
+
+  - [x] 14.2 Implement localized glow effect using CSS
+
+    - Add pseudo-element (::before) to bulb container for ambient glow
+    - Use radial gradient with bulb color extending 400px radius
+    - Apply blur filter (60px) for soft glow effect
+    - Position behind bulb with z-index: -1
+    - _Requirements: 16.7, 16.8_
+
+  - [x] 14.3 Update bulb glow styling for better visual effect
+
+    - Increase glow size and blur for more realistic light emission
+    - Adjust opacity based on on/off state
+    - Ensure smooth transitions match bulb state changes
+    - _Requirements: 16.4, 16.6, 16.8_
+
+  - [x] 14.4 Test visual appearance across different colors and modes
+    - Verify glow effect works in color mode with various RGB values
+    - Verify glow effect works in white mode with different temperatures
+    - Verify off state shows minimal/no glow
+    - Verify transitions are smooth
+    - _Requirements: 16.2, 16.3, 16.4, 16.6_
+
 ## Summary
 
 The Shelly Lightbulb Simulator is fully implemented with all requirements met:
+
 - ✅ Backend: Spring Boot with Kotlin, REST API, RPC API, GraphQL API
 - ✅ Frontend: Preact with realistic 3D bulb visualization
 - ✅ Real-time synchronization via GraphQL WebSocket subscriptions
@@ -175,6 +233,4 @@ The Shelly Lightbulb Simulator is fully implemented with all requirements met:
 - ✅ Built-in API tester
 - ✅ Full support for color mode, white mode, transitions, and effects
 
-All 17 requirements from the requirements document have been successfully implemented.
-
-
+**Current Task:** Refining the bulb component to use localized glow effect instead of full-screen background color changes (Task 14).

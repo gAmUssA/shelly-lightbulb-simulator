@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect } from "preact/hooks";
 
 /**
  * Convert color temperature in Kelvin to RGB values
@@ -45,7 +45,7 @@ function kelvinToRgb(kelvin) {
 }
 
 export default function Bulb({ state }) {
-  const [bgColor, setBgColor] = useState('#000000');
+  const [bgColor, setBgColor] = useState("#000000");
   const [transition, setTransition] = useState(0);
 
   useEffect(() => {
@@ -55,17 +55,17 @@ export default function Bulb({ state }) {
     setTransition(state.transition || 0);
 
     // Calculate background color based on state
-    let color = '#000000';
+    let color = "#000000";
 
     if (state.ison) {
-      if (state.mode === 'COLOR') {
+      if (state.mode === "COLOR") {
         // Color mode - apply gain multiplier to RGB values
         const gain = (state.gain || 100) / 100;
         const r = Math.round((state.red || 0) * gain);
         const g = Math.round((state.green || 0) * gain);
         const b = Math.round((state.blue || 0) * gain);
         color = `rgb(${r}, ${g}, ${b})`;
-      } else if (state.mode === 'WHITE') {
+      } else if (state.mode === "WHITE") {
         // White mode - convert temperature to RGB and apply brightness
         const temp = state.temp || 3000;
         const brightness = (state.brightness || 100) / 100;
@@ -80,72 +80,87 @@ export default function Bulb({ state }) {
     setBgColor(color);
   }, [state]);
 
+  const isOn = state?.ison || false;
+
   const containerStyle = {
-    width: '100vw',
-    height: '100vh',
-    backgroundColor: bgColor,
-    transition: `background-color ${transition}ms ease-in-out`,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "#2d3748",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 0,
   };
 
   const bulbContainerStyle = {
-    position: 'relative',
-    width: '200px',
-    height: '280px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    filter: isOn ? `drop-shadow(0 0 80px ${bgColor})` : "none",
+    transition: `filter ${transition}ms ease-in-out`,
   };
 
-  const isOn = state?.ison || false;
-  
   const bulbGlassStyle = {
-    width: '120px',
-    height: '160px',
-    borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%',
-    position: 'relative',
-    background: isOn 
-      ? 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 40%, transparent 70%)'
-      : 'radial-gradient(circle at 30% 30%, rgba(100, 100, 100, 0.3), rgba(80, 80, 80, 0.2) 40%, rgba(60, 60, 60, 0.4) 70%)',
+    width: "200px",
+    height: "240px",
+    borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
+    position: "relative",
+    background: isOn
+      ? `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), ${bgColor} 50%, ${bgColor} 100%)`
+      : "radial-gradient(circle at 30% 30%, rgba(100, 100, 100, 0.3), rgba(80, 80, 80, 0.2) 40%, rgba(60, 60, 60, 0.4) 70%)",
     boxShadow: isOn
-      ? 'inset 0 0 30px rgba(0, 0, 0, 0.2), inset -10px -10px 20px rgba(0, 0, 0, 0.1)'
-      : 'inset 0 0 30px rgba(0, 0, 0, 0.5), inset -10px -10px 20px rgba(0, 0, 0, 0.3)',
+      ? `inset 0 0 60px rgba(0, 0, 0, 0.2), 0 0 100px ${bgColor}`
+      : "inset 0 0 30px rgba(0, 0, 0, 0.5), inset -10px -10px 20px rgba(0, 0, 0, 0.3)",
     transition: `all ${transition}ms ease-in-out`,
   };
 
-  const bulbGlowStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%',
-    backgroundColor: bgColor,
-    opacity: isOn ? 1 : 0.1,
-    filter: isOn ? 'blur(20px)' : 'blur(5px)',
+  const filamentStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "80px",
+    height: "120px",
+    borderRadius: "50%",
+    backgroundColor: isOn ? bgColor : "rgba(100, 100, 100, 0.3)",
+    opacity: isOn ? 1 : 0.2,
+    filter: isOn ? "blur(20px)" : "blur(5px)",
     transition: `all ${transition}ms ease-in-out`,
   };
 
   const bulbBaseStyle = {
-    width: '60px',
-    height: '40px',
-    background: 'linear-gradient(to bottom, #888, #555)',
-    borderRadius: '5px',
-    marginTop: '5px',
-    position: 'relative',
+    width: "80px",
+    height: "50px",
+    background: "linear-gradient(to bottom, #999, #666, #444)",
+    borderRadius: "0 0 10px 10px",
+    marginTop: "5px",
+    position: "relative",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
+  };
+
+  const bulbThreadsStyle = {
+    position: "absolute",
+    top: "5px",
+    left: "10%",
+    width: "80%",
+    height: "30px",
+    background:
+      "repeating-linear-gradient(to bottom, #777 0px, #777 3px, #555 3px, #555 6px)",
+    borderRadius: "5px",
   };
 
   return (
     <div style={containerStyle}>
       <div style={bulbContainerStyle}>
         <div style={bulbGlassStyle}>
-          <div style={bulbGlowStyle}></div>
+          <div style={filamentStyle}></div>
         </div>
-        <div style={bulbBaseStyle}></div>
+        <div style={bulbBaseStyle}>
+          <div style={bulbThreadsStyle}></div>
+        </div>
       </div>
     </div>
   );

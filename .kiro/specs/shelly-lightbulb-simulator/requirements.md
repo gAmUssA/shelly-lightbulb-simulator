@@ -201,6 +201,9 @@ This project is a web-based simulator that emulates the Shelly RGBW2 smart light
 4. WHEN the color changes THEN the bulb's glow and color SHALL transition smoothly
 5. WHEN the bulb is displayed THEN it SHALL include visual elements such as a bulb base, glass envelope, and realistic proportions
 6. WHEN the bulb state changes THEN the visual representation SHALL maintain the bulb-like appearance throughout transitions
+7. WHEN the bulb is displayed THEN only the bulb component SHALL emit light and glow, not the entire page background
+8. WHEN the bulb is on THEN the glow effect SHALL be contained to the bulb area with a radial gradient extending outward from the bulb
+9. WHEN the page background is visible THEN it SHALL remain a neutral dark color regardless of bulb state
 
 ### Requirement 17: Quick Color Preset Buttons
 
