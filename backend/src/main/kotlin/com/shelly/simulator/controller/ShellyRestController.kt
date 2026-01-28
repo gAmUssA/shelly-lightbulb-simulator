@@ -77,6 +77,11 @@ class ShellyRestController(private val lightService: LightService) {
         lightService.updateState(mutableParams)
     }
     
+    @GetMapping("/shelly")
+    fun getShellyInfo(): ShellyInfo {
+        return lightService.getShellyInfo()
+    }
+    
     @GetMapping("/status")
     fun getStatus(): DeviceStatus {
         return lightService.getDeviceStatus()

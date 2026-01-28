@@ -100,6 +100,7 @@ export default function ApiTester() {
           <option value="/light/0">/light/0</option>
           <option value="/color/0">/color/0</option>
           <option value="/white/0">/white/0</option>
+          <option value="/shelly">/shelly</option>
           <option value="/status">/status</option>
           <option value="/rpc">/rpc</option>
         </select>

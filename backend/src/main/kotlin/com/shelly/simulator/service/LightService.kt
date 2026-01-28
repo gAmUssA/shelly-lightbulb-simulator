@@ -3,6 +3,7 @@ package com.shelly.simulator.service
 import com.shelly.simulator.model.DeviceStatus
 import com.shelly.simulator.model.LightMode
 import com.shelly.simulator.model.LightState
+import com.shelly.simulator.model.ShellyInfo
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -30,6 +31,10 @@ class LightService {
             light = state.copy(),
             uptime = uptime
         )
+    }
+    
+    fun getShellyInfo(): ShellyInfo {
+        return ShellyInfo()
     }
     
     fun getStateFlow(): SharedFlow<LightState> = _stateFlow.asSharedFlow()
